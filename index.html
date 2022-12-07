@@ -3,7 +3,7 @@
 <head>
 <meta charset=utf-8>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aminoacid Signature Generator | Cloud Run</title>
+<title>Aminoacid Signature Generator | WebApp</title>
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="preload" as="font">
 <link href="/assets/cloud-run-36-color.png" rel="icon" type="image/png" />
 <link href="/assets/style.css" rel="stylesheet" type="text/css" />
@@ -20,14 +20,18 @@
 			</div>
             <div class="message">
                 <h1>Aminoacid Signature Generator</h1>
-                <p>Upload the CSV file that was processed using AminoacidProfiler.<a href="https://github.com/ABUSHEIKHSP/aminoacidProfiler" target="_blank"> Click here to download</a></p>
-                
+                <p>Upload the CSV file generated using <a href="https://github.com/ABUSHEIKHSP/aminoacidProfiler/archive/refs/heads/linux-main.zip" target="_blank">AminoacidProfiler</a></p>
+                <p>
+                <a href="assets/Single Digit - result.csv">Download</a> our AminoacidProfiler processed file.
+                </p>
+              
                 <form method="POST" action="/" enctype="multipart/form-data">
                     <label for="filename">Select your CSV file</label><br>
                     <input type="file" name="filename"><br><br>
                     <input type="submit" name="submit" value="Upload CSV File"><br>
                       
                 </form>
+
             </div>
             
     	
