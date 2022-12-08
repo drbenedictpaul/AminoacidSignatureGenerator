@@ -1,4 +1,4 @@
-# Aminoacid Signature Generator
+# Aminoacid Signature Generator (ASiGnor)
 
 Aminoacid Signature Generator is an online tool that generates aminoacid signatures from a specific protein at varying thresholds.
 
