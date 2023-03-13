@@ -64,7 +64,7 @@ func main() {
 
 // helloRunHandler responds to requests by rendering an HTML page.
 func helloRunHandler(w http.ResponseWriter, r *http.Request) {
-
+	
 	tmpl.ExecuteTemplate(w, "index.html", "Aminoacid Signature Generator")
 
 	// if err := tmpl.Execute(w, data); err != nil {
@@ -84,8 +84,19 @@ func helloRunHandler(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprintf(w, err.Error())
 		}
 		
+		sars2SignCount := make(map[string]int)
+		sarsSignCount := make(map[string]int)
+		mersSignCount := make(map[string]int)
+		oc43SignCount := make(map[string]int)
+		e229SignCount := make(map[string]int)
+		nl63SignCount := make(map[string]int)
+		hku1SignCount := make(map[string]int)
+		
+		//var sars2sign int	
+
 		records := data
-	
+
+		
 	for z := 8.50; z > 7.30; z -= 0.10 {
 	
 		for x := 0; x < len(records); x++ {
@@ -175,19 +186,83 @@ func helloRunHandler(w http.ResponseWriter, r *http.Request) {
 
 		s := fmt.Sprint(math.Round(z*100)/100)
 
-		 signature := [][]string{{s, records[x][0],records[x][1], records[x][2], ALA+ARG+ASP+ASN+CYS+GLA+GLN+GLY+HIS+ILE+LEU+LYS+MET+PHY+PRO+SER+THR+TRP+TYR+VAL}}
+		// signature := [][]string{{s, records[x][0],records[x][1], records[x][2], ALA+ARG+ASP+ASN+CYS+GLA+GLN+GLY+HIS+ILE+LEU+LYS+MET+PHY+PRO+SER+THR+TRP+TYR+VAL}}
 
-		 filedata := "<table>"
-		for _, Col := range signature {
-			filedata = filedata + "<tr>"
-			filedata = filedata + "<td>" + Col[0] + "</td>" + "<td>" + Col[1] + "</td>" + "<td>" + Col[2] + "</td>" + "<td>" + Col[3] + "</td>" + "<td>" + Col[4] + "</td>" 
-			filedata = filedata + "</tr>"
-		}
+		 //fmt.Println(records[x][0])
+		// filedata := "<table>"
+		// for _, Col := range signature {
+		// 	filedata = filedata + "<tr>"
+		// 	filedata = filedata + "<td>" + Col[0] + "</td>" + "<td>" + Col[1] + "</td>" + "<td>" + Col[2] + "</td>" + "<td>" + Col[3] + "</td>" + "<td>" + Col[4] + "</td>" 
+		// 	filedata = filedata + "</tr>"
+		// }
 	
-		filedata = filedata + "</table>"
+		// filedata = filedata + "</table>"
 		
-		fmt.Fprintf(w, filedata)
+		// fmt.Fprintf(w, filedata)
+		// fmt.Println(signature)
+		
+		threshold := s
+		//id := records[x][0]
+		virustype := records[x][1]
+		aasignature := ALA+ARG+ASP+ASN+CYS+GLA+GLN+GLY+HIS+ILE+LEU+LYS+MET+PHY+PRO+SER+THR+TRP+TYR+VAL
+
+		
+		
+
+		
+		
+		switch virustype {
+		case "SARS 2":
+			sars2SignCount[threshold + " " + aasignature] = sars2SignCount[threshold + " " + aasignature] + 1
+		case "SARS":
+			sarsSignCount[threshold + " " + aasignature] = sarsSignCount[threshold + " " + aasignature] + 1
+		case "MERS":
+			mersSignCount[threshold + " " + aasignature] = mersSignCount[threshold + " " + aasignature] + 1
+		case "OC43":
+			oc43SignCount[threshold + " " + aasignature] = oc43SignCount[threshold + " " + aasignature] + 1
+		case "229E":
+			e229SignCount[threshold + " " + aasignature] = e229SignCount[threshold + " " + aasignature] + 1
+		case "NL63":
+			nl63SignCount[threshold + " " + aasignature] = nl63SignCount[threshold + " " + aasignature] + 1
+		case "HKU1":
+			hku1SignCount[threshold + " " + aasignature] = hku1SignCount[threshold + " " + aasignature] + 1
+			
+			
+			
+			
+			
+			
+		
+		// default:
+		// 	fmt.Println("")
+	// }
+		
+		// for corona, sign := range sars2SignCount{
+		// fmt.Println(corona, sign)
+		}
+		
+}
+
+	}
+	fmt.Println("SARS 2: ", sars2SignCount)
+	fmt.Println("SARS: ", sarsSignCount)
+	fmt.Println("MERS: ", mersSignCount)
+	fmt.Println("OC43: ", oc43SignCount)
+	fmt.Println("229E: ", e229SignCount)
+	fmt.Println("NL63: ", nl63SignCount)
+	fmt.Println("HKU1: ", hku1SignCount)
+		
+	// filedata := "<table>"
+	// for _, Col := range signature {
+	// 	filedata = filedata + "<tr>"
+	// 	filedata = filedata + "<td>" + Col[0] + "</td>" + "<td>" + Col[1] + "</td>" + "<td>" + Col[2] + "</td>" + "<td>" + Col[3] + "</td>" + "<td>" + Col[4] + "</td>" 
+	// 	filedata = filedata + "</tr>"
+	// }
+
+	// filedata = filedata + "</table>"
+	
+	// fmt.Fprintf(w, filedata)
+
 }
 	}
-}
-}
+// }
