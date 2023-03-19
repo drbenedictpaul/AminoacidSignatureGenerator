@@ -9,6 +9,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+
 )
 
 // templateData provides template parameters.
@@ -22,7 +23,7 @@ var (
 	data templateData
 	tmpl *template.Template
 )
-
+	
 func main() {
 	// Initialize template parameters.
 	service := os.Getenv("K_SERVICE")
@@ -60,7 +61,10 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 }
+
+
 
 // helloRunHandler responds to requests by rendering an HTML page.
 func helloRunHandler(w http.ResponseWriter, r *http.Request) {
@@ -72,7 +76,22 @@ func helloRunHandler(w http.ResponseWriter, r *http.Request) {
 	// 	log.Printf("template.Execute: %v", err)
 	// 	http.Error(w, msg, http.StatusInternalServerError)
 	// }
+	corona85 := make(map[string]int)
+	corona84 := make(map[string]int)
+	corona83 := make(map[string]int)
+	corona82 := make(map[string]int)
+	corona81 := make(map[string]int)
+	corona80 := make(map[string]int)
+	corona79 := make(map[string]int)
+	corona78 := make(map[string]int)
+	corona77 := make(map[string]int)
+	corona76 := make(map[string]int)
+	corona74 := make(map[string]int)
+	corona75 := make(map[string]int)
+	corona73 := make(map[string]int)
+	
 
+	
 	if r.Method == http.MethodPost {
 		file, _, err := r.FormFile("filename")
 		if err != nil {
@@ -84,18 +103,10 @@ func helloRunHandler(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprintf(w, err.Error())
 		}
 		
-		sars2SignCount := make(map[string]int)
-		sarsSignCount := make(map[string]int)
-		mersSignCount := make(map[string]int)
-		oc43SignCount := make(map[string]int)
-		e229SignCount := make(map[string]int)
-		nl63SignCount := make(map[string]int)
-		hku1SignCount := make(map[string]int)
-		
-		//var sars2sign int	
-
 		records := data
 
+		
+		
 		
 	for z := 8.50; z > 7.30; z -= 0.10 {
 	
@@ -188,7 +199,7 @@ func helloRunHandler(w http.ResponseWriter, r *http.Request) {
 
 		// signature := [][]string{{s, records[x][0],records[x][1], records[x][2], ALA+ARG+ASP+ASN+CYS+GLA+GLN+GLY+HIS+ILE+LEU+LYS+MET+PHY+PRO+SER+THR+TRP+TYR+VAL}}
 
-		 //fmt.Println(records[x][0])
+		// //  fmt.Println(records[x][0])
 		// filedata := "<table>"
 		// for _, Col := range signature {
 		// 	filedata = filedata + "<tr>"
@@ -199,7 +210,7 @@ func helloRunHandler(w http.ResponseWriter, r *http.Request) {
 		// filedata = filedata + "</table>"
 		
 		// fmt.Fprintf(w, filedata)
-		// fmt.Println(signature)
+		// // fmt.Println(signature)
 		
 		threshold := s
 		//id := records[x][0]
@@ -207,62 +218,86 @@ func helloRunHandler(w http.ResponseWriter, r *http.Request) {
 		aasignature := ALA+ARG+ASP+ASN+CYS+GLA+GLN+GLY+HIS+ILE+LEU+LYS+MET+PHY+PRO+SER+THR+TRP+TYR+VAL
 
 		
-		
+	// sars2SignCount := make(map[string]int)
+	// sarsSignCount := make(map[string]int)
+	// mersSignCount := make(map[string]int)
+	// oc43SignCount := make(map[string]int)
+	// e229SignCount := make(map[string]int)
+	// nl63SignCount := make(map[string]int)
+	// hku1SignCount := make(map[string]int)
 
-		
-		
-		switch virustype {
-		case "SARS 2":
-			sars2SignCount[threshold + " " + aasignature] = sars2SignCount[threshold + " " + aasignature] + 1
-		case "SARS":
-			sarsSignCount[threshold + " " + aasignature] = sarsSignCount[threshold + " " + aasignature] + 1
-		case "MERS":
-			mersSignCount[threshold + " " + aasignature] = mersSignCount[threshold + " " + aasignature] + 1
-		case "OC43":
-			oc43SignCount[threshold + " " + aasignature] = oc43SignCount[threshold + " " + aasignature] + 1
-		case "229E":
-			e229SignCount[threshold + " " + aasignature] = e229SignCount[threshold + " " + aasignature] + 1
-		case "NL63":
-			nl63SignCount[threshold + " " + aasignature] = nl63SignCount[threshold + " " + aasignature] + 1
-		case "HKU1":
-			hku1SignCount[threshold + " " + aasignature] = hku1SignCount[threshold + " " + aasignature] + 1
-			
-			
-			
-			
-			
-			
-		
-		// default:
-		// 	fmt.Println("")
-	// }
-		
-		// for corona, sign := range sars2SignCount{
-		// fmt.Println(corona, sign)
-		}
-		
-}
-
-	}
-	fmt.Println("SARS 2: ", sars2SignCount)
-	fmt.Println("SARS: ", sarsSignCount)
-	fmt.Println("MERS: ", mersSignCount)
-	fmt.Println("OC43: ", oc43SignCount)
-	fmt.Println("229E: ", e229SignCount)
-	fmt.Println("NL63: ", nl63SignCount)
-	fmt.Println("HKU1: ", hku1SignCount)
-		
-	// filedata := "<table>"
-	// for _, Col := range signature {
-	// 	filedata = filedata + "<tr>"
-	// 	filedata = filedata + "<td>" + Col[0] + "</td>" + "<td>" + Col[1] + "</td>" + "<td>" + Col[2] + "</td>" + "<td>" + Col[3] + "</td>" + "<td>" + Col[4] + "</td>" 
-	// 	filedata = filedata + "</tr>"
-	// }
-
-	// filedata = filedata + "</table>"
 	
-	// fmt.Fprintf(w, filedata)
+		
+		
+		switch threshold {
+		case "8.5":
+			// sars2SignCount[" " + threshold + " " + aasignature + " "] = sars2SignCount[" " + threshold + " " + aasignature] + 1
+			corona85[" " + virustype + " " + aasignature + " "] = corona85[" " + virustype + " " + aasignature + " "] + 1
 
-}
+		case "8.4":
+			// sarsSignCount[" " + threshold + " " + aasignature + " "] = sarsSignCount[" " + threshold + " " + aasignature] + 1
+			corona84[" " + virustype + " " + aasignature + " "] = corona84[" " + virustype + " " + aasignature + " "] + 1
+
+		case "8.3":
+			// mersSignCount[" " + threshold + " " + aasignature + " "] = mersSignCount[" " + threshold + " " + aasignature] + 1
+			corona83[" " + virustype + " " + aasignature + " "] = corona83[" " + virustype + " " + aasignature + " "] + 1
+			
+		case "8.2":
+			// oc43SignCount[" " + threshold + " " + aasignature + " "] = oc43SignCount[" " + threshold + " " + aasignature] + 1
+			corona82[" " + virustype + " " + aasignature + " "] = corona82[" " + virustype + " " + aasignature + " "] + 1
+
+		case "8.1":
+			// e229SignCount[" " + threshold + " " + aasignature + " "] = e229SignCount[" " + threshold + " " + aasignature] + 1
+			corona81[" " + virustype + " " + aasignature + " "] = corona81[" " + virustype + " " + aasignature + " "] + 1
+
+		case "8.0":
+			// nl63SignCount[" " + threshold + " " + aasignature + " "] = nl63SignCount[" " + threshold + " " + aasignature] + 1
+			corona80[" " + virustype + " " + aasignature + " "] = corona80[" " + virustype + " " + aasignature + " "] + 1
+
+		case "7.9":
+			// hku1SignCount[" " + threshold + " " + aasignature + " "] = hku1SignCount[" " + threshold + " " + aasignature] + 1
+			corona79[" " + virustype + " " + aasignature + " "] = corona79[" " + virustype + " " + aasignature + " "] + 1
+
+		case "7.8":
+			// hku1SignCount[" " + threshold + " " + aasignature + " "] = hku1SignCount[" " + threshold + " " + aasignature] + 1
+			corona78[" " + virustype + " " + aasignature + " "] = corona78[" " + virustype + " " + aasignature + " "] + 1
+
+		case "7.7":
+			corona77[" " + virustype + " " + aasignature + " "] = corona77[" " + virustype + " " + aasignature + " "] + 1
+
+		case "7.6":
+			corona76[" " + virustype + " " + aasignature + " "] = corona76[" " + virustype + " " + aasignature + " "] + 1
+
+		case "7.5":
+			corona75[" " + virustype + " " + aasignature + " "] = corona75[" " + virustype + " " + aasignature + " "] + 1
+
+		case "7.4":
+			corona74[" " + virustype + " " + aasignature + " "] = corona74[" " + virustype + " " + aasignature + " "] + 1
+
+		case "7.3":
+			corona73[" " + virustype + " " + aasignature + " "] = corona73[" " + virustype + " " + aasignature + " "] + 1
+			
+		}
+
+		
+	
+		
 	}
-// }
+	
+}
+
+	}
+	fmt.Fprint(w, corona85)
+	fmt.Fprint(w, corona84)
+	fmt.Fprint(w, corona83)
+	fmt.Fprint(w, corona82)
+	fmt.Fprint(w, corona81)
+	fmt.Fprint(w, corona80)
+	fmt.Fprint(w, corona79)
+	fmt.Fprint(w, corona78)
+	fmt.Fprint(w, corona77)
+	fmt.Fprint(w, corona75)
+	fmt.Fprint(w, corona74)
+	fmt.Fprint(w, corona73)
+
+	}
