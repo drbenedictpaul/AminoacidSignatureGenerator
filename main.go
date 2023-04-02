@@ -1,15 +1,15 @@
 package main
 
 import (
-	"fmt"
 	"encoding/csv"
-	"math"
-	"strconv"
+	"encoding/json"
+	"fmt"
 	"html/template"
 	"log"
+	"math"
 	"net/http"
 	"os"
-
+	"strconv"
 )
 
 // templateData provides template parameters.
@@ -23,7 +23,7 @@ var (
 	data templateData
 	tmpl *template.Template
 )
-	
+
 func main() {
 	// Initialize template parameters.
 	service := os.Getenv("K_SERVICE")
@@ -45,6 +45,7 @@ func main() {
 
 	// Define HTTP server.
 	http.HandleFunc("/", helloRunHandler)
+	// http.HandleFunc("/results.html", results)
 
 	fs := http.FileServer(http.Dir("./assets"))
 	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
@@ -64,11 +65,9 @@ func main() {
 
 }
 
-
-
 // helloRunHandler responds to requests by rendering an HTML page.
 func helloRunHandler(w http.ResponseWriter, r *http.Request) {
-	
+
 	tmpl.ExecuteTemplate(w, "index.html", "Aminoacid Signature Generator")
 
 	// if err := tmpl.Execute(w, data); err != nil {
@@ -89,9 +88,7 @@ func helloRunHandler(w http.ResponseWriter, r *http.Request) {
 	corona74 := make(map[string]int)
 	corona75 := make(map[string]int)
 	corona73 := make(map[string]int)
-	
 
-	
 	if r.Method == http.MethodPost {
 		file, _, err := r.FormFile("filename")
 		if err != nil {
@@ -102,202 +99,395 @@ func helloRunHandler(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			fmt.Fprintf(w, err.Error())
 		}
-		
+
 		records := data
 
-		
-		
-		
-	for z := 8.50; z > 7.30; z -= 0.10 {
-	
-		for x := 0; x < len(records); x++ {
-		Alanine, _ := strconv.ParseFloat(records[x][3], 32)
-		Arginine, _ := strconv.ParseFloat(records[x][4], 32)
-		AsparticAcid, _ := strconv.ParseFloat(records[x][5], 32)
-		Asparagine, _ := strconv.ParseFloat(records[x][6], 32)
-		Cysteine, _ := strconv.ParseFloat(records[x][7], 32)
-		GlutamicAcid, _ := strconv.ParseFloat(records[x][8], 32)
-		Glutamine, _ := strconv.ParseFloat(records[x][9], 32)
-		Glycine, _ := strconv.ParseFloat(records[x][10], 32)
-		Histidine, _ := strconv.ParseFloat(records[x][11], 32)
-		Isoleucine, _ := strconv.ParseFloat(records[x][12], 32)
-		Leucine, _ := strconv.ParseFloat(records[x][13], 32)
-		Lysine, _ := strconv.ParseFloat(records[x][14], 32)
-		Methionine, _ := strconv.ParseFloat(records[x][15], 32)
-		Phenylalanine, _ := strconv.ParseFloat(records[x][16], 32)
-		Proline, _ := strconv.ParseFloat(records[x][17], 32)
-		Serine, _ := strconv.ParseFloat(records[x][18], 32)
-		Threonine, _ := strconv.ParseFloat(records[x][19], 32)
-		Tryptophan, _ := strconv.ParseFloat(records[x][20], 32)
-		Tyrosine, _ := strconv.ParseFloat(records[x][21], 32)
-		Valine, _ := strconv.ParseFloat(records[x][22], 32)
+		for z := 8.50; z > 7.30; z -= 0.10 {
 
-		var ALA, ARG, ASP, ASN, CYS, GLA, GLN, GLY, HIS, ILE, LEU, LYS, MET, PHY, PRO, SER, THR, TRP, TYR, VAL string 
+			for x := 0; x < len(records); x++ {
+				Alanine, _ := strconv.ParseFloat(records[x][3], 32)
+				Arginine, _ := strconv.ParseFloat(records[x][4], 32)
+				AsparticAcid, _ := strconv.ParseFloat(records[x][5], 32)
+				Asparagine, _ := strconv.ParseFloat(records[x][6], 32)
+				Cysteine, _ := strconv.ParseFloat(records[x][7], 32)
+				GlutamicAcid, _ := strconv.ParseFloat(records[x][8], 32)
+				Glutamine, _ := strconv.ParseFloat(records[x][9], 32)
+				Glycine, _ := strconv.ParseFloat(records[x][10], 32)
+				Histidine, _ := strconv.ParseFloat(records[x][11], 32)
+				Isoleucine, _ := strconv.ParseFloat(records[x][12], 32)
+				Leucine, _ := strconv.ParseFloat(records[x][13], 32)
+				Lysine, _ := strconv.ParseFloat(records[x][14], 32)
+				Methionine, _ := strconv.ParseFloat(records[x][15], 32)
+				Phenylalanine, _ := strconv.ParseFloat(records[x][16], 32)
+				Proline, _ := strconv.ParseFloat(records[x][17], 32)
+				Serine, _ := strconv.ParseFloat(records[x][18], 32)
+				Threonine, _ := strconv.ParseFloat(records[x][19], 32)
+				Tryptophan, _ := strconv.ParseFloat(records[x][20], 32)
+				Tyrosine, _ := strconv.ParseFloat(records[x][21], 32)
+				Valine, _ := strconv.ParseFloat(records[x][22], 32)
 
-		if Alanine >= z {
-			ALA = "A"
-		}
-		if Arginine >= z {
-			ARG = "R"
-		}
-		if AsparticAcid >= z {
-			ASP = "D"
-		}
-		if Asparagine >= z {
-			ASN = "N"
-		}
-		if Cysteine >= z {
-			CYS = "C"
-		}
-		if GlutamicAcid >= z {
-			GLA = "E"
-		}
-		if Glutamine >= z {
-			GLN = "Q"
-		}
-		if Glycine >= z {
-			GLY = "G"
-		}
-		if Histidine >= z {
-			HIS = "H"
-		}
-		if Isoleucine >= z {
-			ILE = "I"
-		}
-		if Leucine >= z {
-			LEU = "L"
-		}
-		if Lysine >= z {
-			LYS = "K"
-		}
-		if Methionine >= z {
-			MET = "M"
-		}
-		if Phenylalanine >= z {
-			PHY = "F"
-		}
-		if Proline >= z {
-			PRO = "P"
-		}
-		if Serine >= z {
-			SER = "S"
-		}
-		if Threonine >= z {
-			THR = "T"
-		}
-		if Tryptophan >= z {
-			TRP = "W"
-		}
-		if Tyrosine >= z {
-			TYR = "Y"
-		}
-		if Valine >= z {
-			VAL = "V"
+				var ALA, ARG, ASP, ASN, CYS, GLA, GLN, GLY, HIS, ILE, LEU, LYS, MET, PHY, PRO, SER, THR, TRP, TYR, VAL string
+
+				if Alanine >= z {
+					ALA = "A"
+				}
+				if Arginine >= z {
+					ARG = "R"
+				}
+				if AsparticAcid >= z {
+					ASP = "D"
+				}
+				if Asparagine >= z {
+					ASN = "N"
+				}
+				if Cysteine >= z {
+					CYS = "C"
+				}
+				if GlutamicAcid >= z {
+					GLA = "E"
+				}
+				if Glutamine >= z {
+					GLN = "Q"
+				}
+				if Glycine >= z {
+					GLY = "G"
+				}
+				if Histidine >= z {
+					HIS = "H"
+				}
+				if Isoleucine >= z {
+					ILE = "I"
+				}
+				if Leucine >= z {
+					LEU = "L"
+				}
+				if Lysine >= z {
+					LYS = "K"
+				}
+				if Methionine >= z {
+					MET = "M"
+				}
+				if Phenylalanine >= z {
+					PHY = "F"
+				}
+				if Proline >= z {
+					PRO = "P"
+				}
+				if Serine >= z {
+					SER = "S"
+				}
+				if Threonine >= z {
+					THR = "T"
+				}
+				if Tryptophan >= z {
+					TRP = "W"
+				}
+				if Tyrosine >= z {
+					TYR = "Y"
+				}
+				if Valine >= z {
+					VAL = "V"
+				}
+
+				s := fmt.Sprint(math.Round(z*100) / 100)
+
+				threshold := s
+				//id := records[x][0]
+				virustype := records[x][1]
+				aasignature := ALA + ARG + ASP + ASN + CYS + GLA + GLN + GLY + HIS + ILE + LEU + LYS + MET + PHY + PRO + SER + THR + TRP + TYR + VAL
+
+				switch threshold {
+				case "8.5":
+					corona85[" "+virustype+"-"+aasignature+" "] = corona85[" "+virustype+"-"+aasignature+" "] + 1
+
+				case "8.4":
+					corona84[" "+virustype+"-"+aasignature+" "] = corona84[" "+virustype+"-"+aasignature+" "] + 1
+
+				case "8.3":
+					corona83[" "+virustype+"-"+aasignature+" "] = corona83[" "+virustype+"-"+aasignature+" "] + 1
+
+				case "8.2":
+					corona82[" "+virustype+"-"+aasignature+" "] = corona82[" "+virustype+"-"+aasignature+" "] + 1
+
+				case "8.1":
+					corona81[" "+virustype+"-"+aasignature+" "] = corona81[" "+virustype+"-"+aasignature+" "] + 1
+
+				case "8.0":
+					corona80[" "+virustype+"-"+aasignature+" "] = corona80[" "+virustype+"-"+aasignature+" "] + 1
+
+				case "7.9":
+					corona79[" "+virustype+"-"+aasignature+" "] = corona79[" "+virustype+"-"+aasignature+" "] + 1
+
+				case "7.8":
+					corona78[" "+virustype+"-"+aasignature+" "] = corona78[" "+virustype+"-"+aasignature+" "] + 1
+
+				case "7.7":
+					corona77[" "+virustype+"-"+aasignature+" "] = corona77[" "+virustype+"-"+aasignature+" "] + 1
+
+				case "7.6":
+					corona76[" "+virustype+"-"+aasignature+" "] = corona76[" "+virustype+"-"+aasignature+" "] + 1
+
+				case "7.5":
+					corona75[" "+virustype+"-"+aasignature+" "] = corona75[" "+virustype+"-"+aasignature+" "] + 1
+
+				case "7.4":
+					corona74[" "+virustype+"-"+aasignature+" "] = corona74[" "+virustype+"-"+aasignature+" "] + 1
+
+				case "7.3":
+					corona73[" "+virustype+"-"+aasignature+" "] = corona73[" "+virustype+"-"+aasignature+" "] + 1
+
+				}
+			}
 		}
 
-		s := fmt.Sprint(math.Round(z*100)/100)
+		cor85, err := json.Marshal(corona85)
 
-		// signature := [][]string{{s, records[x][0],records[x][1], records[x][2], ALA+ARG+ASP+ASN+CYS+GLA+GLN+GLY+HIS+ILE+LEU+LYS+MET+PHY+PRO+SER+THR+TRP+TYR+VAL}}
+		if err != nil {
+			fmt.Printf("Error: %s", err.Error())
+			// } else {
+			// 	fmt.Fprint(w, string(cor85))
+		}
 
-		// //  fmt.Println(records[x][0])
-		// filedata := "<table>"
-		// for _, Col := range signature {
-		// 	filedata = filedata + "<tr>"
-		// 	filedata = filedata + "<td>" + Col[0] + "</td>" + "<td>" + Col[1] + "</td>" + "<td>" + Col[2] + "</td>" + "<td>" + Col[3] + "</td>" + "<td>" + Col[4] + "</td>" 
-		// 	filedata = filedata + "</tr>"
+		cor84, err := json.Marshal(corona84)
+
+		if err != nil {
+			fmt.Printf("Error: %s", err.Error())
+			// } else {
+			// 	fmt.Println(string(cor84))
+		}
+
+		cor83, err := json.Marshal(corona83)
+
+		if err != nil {
+			fmt.Printf("Error: %s", err.Error())
+			// } else {
+			//    fmt.Println(string(cor83))
+		}
+
+		cor82, err := json.Marshal(corona82)
+
+		if err != nil {
+			fmt.Printf("Error: %s", err.Error())
+			// } else {
+			//    fmt.Println(string(cor82))
+		}
+
+		cor81, err := json.Marshal(corona81)
+
+		if err != nil {
+			fmt.Printf("Error: %s", err.Error())
+			//    } else {
+			//        fmt.Println(string(cor81))
+		}
+
+		cor80, err := json.Marshal(corona80)
+
+		if err != nil {
+			fmt.Printf("Error: %s", err.Error())
+			//    } else {
+			//        fmt.Println(string(cor80))
+		}
+
+		cor79, err := json.Marshal(corona79)
+
+		if err != nil {
+			fmt.Printf("Error: %s", err.Error())
+			//    } else {
+			//        fmt.Println(string(cor79))
+		}
+
+		cor78, err := json.Marshal(corona78)
+
+		if err != nil {
+			fmt.Printf("Error: %s", err.Error())
+			//    } else {
+			//        fmt.Println(string(cor78))
+		}
+
+		cor77, err := json.Marshal(corona77)
+
+		if err != nil {
+			fmt.Printf("Error: %s", err.Error())
+			//    } else {
+			//        fmt.Println(string(cor77))
+		}
+
+		cor76, err := json.Marshal(corona76)
+
+		if err != nil {
+			fmt.Printf("Error: %s", err.Error())
+			//    } else {
+			//        fmt.Println(string(cor76))
+		}
+
+		cor75, err := json.Marshal(corona75)
+
+		if err != nil {
+			fmt.Printf("Error: %s", err.Error())
+			//    } else {
+			//        fmt.Println(string(cor75))
+		}
+
+		cor74, err := json.Marshal(corona74)
+
+		if err != nil {
+			fmt.Printf("Error: %s", err.Error())
+			//    } else {
+			//        fmt.Println(string(cor74))
+		}
+
+		cor73, err := json.Marshal(corona73)
+
+		if err != nil {
+			fmt.Printf("Error: %s", err.Error())
+			//    } else {
+			//        fmt.Println(string(cor73))
+		}
+
+		// now write to JSON file
+
+		// jsonFile, err := os.Create("./aasignature.json")
+
+		// if err != nil {
+		// 		fmt.Println(err)
 		// }
-	
-		// filedata = filedata + "</table>"
-		
-		// fmt.Fprintf(w, filedata)
-		// // fmt.Println(signature)
-		
-		threshold := s
-		//id := records[x][0]
-		virustype := records[x][1]
-		aasignature := ALA+ARG+ASP+ASN+CYS+GLA+GLN+GLY+HIS+ILE+LEU+LYS+MET+PHY+PRO+SER+THR+TRP+TYR+VAL
+		// defer jsonFile.Close()
 
-		
-	// sars2SignCount := make(map[string]int)
-	// sarsSignCount := make(map[string]int)
-	// mersSignCount := make(map[string]int)
-	// oc43SignCount := make(map[string]int)
-	// e229SignCount := make(map[string]int)
-	// nl63SignCount := make(map[string]int)
-	// hku1SignCount := make(map[string]int)
+		// jsonFile.Write(cor73)
+		// jsonFile.Write(cor74)
+		// jsonFile.Write(cor75)
+		// jsonFile.Write(cor76)
+		// jsonFile.Write(cor77)
+		// jsonFile.Write(cor78)
+		// jsonFile.Write(cor79)
+		// jsonFile.Write(cor80)
+		// jsonFile.Write(cor81)
+		// jsonFile.Write(cor82)
+		// jsonFile.Write(cor83)
+		// jsonFile.Write(cor84)
+		// jsonFile.Write(cor85)
 
-	
-		
-		
-		switch threshold {
-		case "8.5":
-			// sars2SignCount[" " + threshold + " " + aasignature + " "] = sars2SignCount[" " + threshold + " " + aasignature] + 1
-			corona85[" " + virustype + " " + aasignature + " "] = corona85[" " + virustype + " " + aasignature + " "] + 1
+		// jsonFile.Close()
 
-		case "8.4":
-			// sarsSignCount[" " + threshold + " " + aasignature + " "] = sarsSignCount[" " + threshold + " " + aasignature] + 1
-			corona84[" " + virustype + " " + aasignature + " "] = corona84[" " + virustype + " " + aasignature + " "] + 1
+		coronavirus := [][]string{{string(cor85), string(cor84), string(cor83), string(cor82), string(cor81), string(cor80), string(cor79), string(cor78), string(cor77), string(cor76), string(cor75), string(cor74), string(cor73)}}
 
-		case "8.3":
-			// mersSignCount[" " + threshold + " " + aasignature + " "] = mersSignCount[" " + threshold + " " + aasignature] + 1
-			corona83[" " + virustype + " " + aasignature + " "] = corona83[" " + virustype + " " + aasignature + " "] + 1
-			
-		case "8.2":
-			// oc43SignCount[" " + threshold + " " + aasignature + " "] = oc43SignCount[" " + threshold + " " + aasignature] + 1
-			corona82[" " + virustype + " " + aasignature + " "] = corona82[" " + virustype + " " + aasignature + " "] + 1
+		filedata := "<table>"
+		for _, Col := range coronavirus {
 
-		case "8.1":
-			// e229SignCount[" " + threshold + " " + aasignature + " "] = e229SignCount[" " + threshold + " " + aasignature] + 1
-			corona81[" " + virustype + " " + aasignature + " "] = corona81[" " + virustype + " " + aasignature + " "] + 1
+			filedata = filedata + "<th>" + "Aminoacid Signatures at Specific Threshold. (Format: StrainID-AASignature: Frequency)"
 
-		case "8.0":
-			// nl63SignCount[" " + threshold + " " + aasignature + " "] = nl63SignCount[" " + threshold + " " + aasignature] + 1
-			corona80[" " + virustype + " " + aasignature + " "] = corona80[" " + virustype + " " + aasignature + " "] + 1
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<th>" + "Threshold 8.5" + "</th>"
+			filedata = filedata + "</tr>"
 
-		case "7.9":
-			// hku1SignCount[" " + threshold + " " + aasignature + " "] = hku1SignCount[" " + threshold + " " + aasignature] + 1
-			corona79[" " + virustype + " " + aasignature + " "] = corona79[" " + virustype + " " + aasignature + " "] + 1
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<td>" + Col[0] + "</td>"
+			// + "<td>" + Col[1] + "</td>" + "<td>" + Col[2] + "</td>" + "<td>" + Col[3] + "</td>" + "<td>" + Col[4] + "</td>"
+			// filedata = filedata + "<td>" + Col[1] + "</td>"
+			// + "<td>" + Col[1] + "</td>" + "<td>" + Col[2] + "</td>" + "<td>" + Col[3] + "</td>" + "<td>" + Col[4] + "</td>"
+			filedata = filedata + "</tr>"
 
-		case "7.8":
-			// hku1SignCount[" " + threshold + " " + aasignature + " "] = hku1SignCount[" " + threshold + " " + aasignature] + 1
-			corona78[" " + virustype + " " + aasignature + " "] = corona78[" " + virustype + " " + aasignature + " "] + 1
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<th>" + "Threshold 8.4" + "</th>"
+			filedata = filedata + "</tr>"
 
-		case "7.7":
-			corona77[" " + virustype + " " + aasignature + " "] = corona77[" " + virustype + " " + aasignature + " "] + 1
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<td>" + Col[1] + "</td>"
+			filedata = filedata + "</tr>"
 
-		case "7.6":
-			corona76[" " + virustype + " " + aasignature + " "] = corona76[" " + virustype + " " + aasignature + " "] + 1
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<th>" + "Threshold 8.3" + "</th>"
+			filedata = filedata + "</tr>"
 
-		case "7.5":
-			corona75[" " + virustype + " " + aasignature + " "] = corona75[" " + virustype + " " + aasignature + " "] + 1
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<td>" + Col[2] + "</td>"
+			filedata = filedata + "</tr>"
 
-		case "7.4":
-			corona74[" " + virustype + " " + aasignature + " "] = corona74[" " + virustype + " " + aasignature + " "] + 1
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<th>" + "Threshold 8.2" + "</th>"
+			filedata = filedata + "</tr>"
 
-		case "7.3":
-			corona73[" " + virustype + " " + aasignature + " "] = corona73[" " + virustype + " " + aasignature + " "] + 1
-			
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<td>" + Col[3] + "</td>"
+			filedata = filedata + "</tr>"
+
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<th>" + "Threshold 8.1" + "</th>"
+			filedata = filedata + "</tr>"
+
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<td>" + Col[4] + "</td>"
+			filedata = filedata + "</tr>"
+
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<th>" + "Threshold 8.0" + "</th>"
+			filedata = filedata + "</tr>"
+
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<td>" + Col[5] + "</td>"
+			filedata = filedata + "</tr>"
+
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<th>" + "Threshold 7.9" + "</th>"
+			filedata = filedata + "</tr>"
+
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<td>" + Col[6] + "</td>"
+			filedata = filedata + "</tr>"
+
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<th>" + "Threshold 7.8" + "</th>"
+			filedata = filedata + "</tr>"
+
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<td>" + Col[7] + "</td>"
+			filedata = filedata + "</tr>"
+
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<th>" + "Threshold 7.7" + "</th>"
+			filedata = filedata + "</tr>"
+
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<td>" + Col[8] + "</td>"
+			filedata = filedata + "</tr>"
+
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<th>" + "Threshold 7.6" + "</th>"
+			filedata = filedata + "</tr>"
+
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<td>" + Col[9] + "</td>"
+			filedata = filedata + "</tr>"
+
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<th>" + "Threshold 7.5" + "</th>"
+			filedata = filedata + "</tr>"
+
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<td>" + Col[10] + "</td>"
+			filedata = filedata + "</tr>"
+
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<th>" + "Threshold 7.4" + "</th>"
+			filedata = filedata + "</tr>"
+
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<td>" + Col[11] + "</td>"
+			filedata = filedata + "</tr>"
+
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<th>" + "Threshold 7.3" + "</th>"
+			filedata = filedata + "</tr>"
+
+			filedata = filedata + "<tr>"
+			filedata = filedata + "<td>" + Col[12] + "</td>"
+			filedata = filedata + "</tr>"
+
 		}
 
-		
-	
-		
+		filedata = filedata + "</table>"
+
+		fmt.Fprintf(w, filedata)
+
 	}
-	
 }
-
-	}
-	fmt.Fprint(w, corona85)
-	fmt.Fprint(w, corona84)
-	fmt.Fprint(w, corona83)
-	fmt.Fprint(w, corona82)
-	fmt.Fprint(w, corona81)
-	fmt.Fprint(w, corona80)
-	fmt.Fprint(w, corona79)
-	fmt.Fprint(w, corona78)
-	fmt.Fprint(w, corona77)
-	fmt.Fprint(w, corona75)
-	fmt.Fprint(w, corona74)
-	fmt.Fprint(w, corona73)
-
-	}
